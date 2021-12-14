@@ -1,6 +1,6 @@
 require_relative('./person')
 
-class Student < Person
+class Teacher < Person
   def initialize(classroom)
     super(name, age, parent_permission)
     @classroom = classroom
