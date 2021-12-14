@@ -1,12 +1,12 @@
 require_relative('./person')
 
 class Teacher < Person
-  def initialize(@specialization)
+  def initialize(specialization)
     super(name, age, parent_permission)
-    @@specialization = @specialization
+    @@specialization = specialization
   end
   
-  def play_hooky
-    "¯\(ツ)/¯"
+  def can_use_services?
+    true
   end
 end
