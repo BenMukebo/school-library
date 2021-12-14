@@ -1,0 +1,11 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+
+BUNDLED WITH
+   2.2.32
