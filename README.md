@@ -11,6 +11,8 @@
 - Implement classes and objects in Ruby.
 - Implement encapsulation and inheritance with Ruby.
 - Run a program using the command line.
+- Implement composition (as an example of the design pattern).
+- Run a program using the command line.
 
 
 ## Getting Started
@@ -53,7 +55,6 @@ $ rubocop -A
 # or
 $ rubocop --auto-correct-all
 ```
-
 
 ## Built With
 
