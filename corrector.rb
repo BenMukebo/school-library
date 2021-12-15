@@ -1,6 +1,6 @@
 class Corrector 
   def correct_name(name)
-   true if name.capitalize
+   true if name[0...10].capitalize
   end
 end
 
