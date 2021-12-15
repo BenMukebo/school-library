@@ -1,9 +1,9 @@
-class Corrector 
+class Corrector
   def correct_name(name)
-   true if name[0...10].capitalize
+    name[0...10].capitalize
   end
 end
 
-person = Corrector.new
+# person = Corrector.new
 
-puts person.correct_name('benkasmukebomagnus')
+# puts person.correct_name('benkasmukebomagnus')
