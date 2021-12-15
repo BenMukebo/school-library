@@ -1,13 +1,13 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Vet clinic database
+# OOP school library
+
 
 ## Description
 
-> Use a relational database to create the data structure for a vet clinic.
+> Use OOP to build a simple app.
 
 ## Learning objectives
-- Use OOP to build a simple app.
 - Implement classes and objects in Ruby.
 - Implement encapsulation and inheritance with Ruby.
 - Run a program using the command line.
@@ -53,7 +53,6 @@ $ rubocop -A
 # or
 $ rubocop --auto-correct-all
 ```
-  
 
 
 ## Built With
