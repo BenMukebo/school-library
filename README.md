@@ -13,6 +13,8 @@
 - Run a program using the command line.
 - Implement composition (as an example of the design pattern).
 - Run a program using the command line.
+- Run a program using the command line.
+- Set up associations between classes and objects.
 
 
 ## Getting Started
