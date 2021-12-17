@@ -68,6 +68,25 @@ class App
     run
   end
 
+
+
+  # '3 - Create a teacher',
+  def create_teacher
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    print 'Specialization: '
+    specialization = gets.chomp
+    teacher = Teacher.new(specialization, name, age)
+    # binding.pry
+    @persons.push({:display => "[Teacher] Name: #{name}, ID: #{teacher.id} Age: #{age}", :object => teacher})
+    # @persons.push({"Teacher" => Teacher.new(specialization, age, name)})
+    puts 'create teacher'
+  end
+
+  
+
   # '4 - Create a book',
   def create_book
     print 'Title: '
