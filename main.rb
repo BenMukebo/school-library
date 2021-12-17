@@ -68,7 +68,11 @@ class App
     run
   end
 
-
+  # 2 - List all people'
+  def person_list
+    @persons.each {|individual| puts(individual[:display])}
+    run
+  end
 
   # '3 - Create a teacher',
   def create_teacher
