@@ -15,7 +15,30 @@ class App
     @rentals = []
   end
 
+  def run 
+    choose = select_options
+    choose = select_options while choose < 1 || choose > 7
 
+    case choose
+    when 1
+      # books_list
+      puts 'first choose'
+    when 2
+      person_list
+    when 3
+      create_person
+    when 4
+      create_book
+    when 5
+      create_rental
+    when 6
+      rentals_list
+    when 7
+    puts "Exit"
+    else
+      puts
+    end
+  end
 
   def select_options
     puts 'Please choose an option by entering a number: '
