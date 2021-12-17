@@ -101,14 +101,6 @@ class App
     student = Student.new(name, age, parent_permission)
     @persons.push({:display => "[Student] Name: #{name}, ID: #{student.id} Age: #{age}", :object => student})
     puts 'create student'
-    # print 'Age: '
-    # age = gets.chomp
-    # print 'Name: '
-    # name = gets.chomp
-    # print 'parent_permission: '
-    # parent_permission = gets.chomp
-    # @persons.push(Student.new(parent_permission, age, name))
-    # puts 'create teacher'
   end
 
   # '3 - Create a person',
@@ -148,6 +140,33 @@ class App
      puts
      run
   end
+
+  # '5 - Create a rental',
+  def create_rental
+    puts 'Select a book from the following list by number: '
+    @books.each_with_index do |book, index|
+      puts "#{index}) #{book[:output]}"
+    end
+    book_selected = Integer(gets.chomp)
+    book_chosen = @books[book_selected][:object]
+
+    puts 'Select a person from the following list by number (not id): '
+    @person_array.each_with_index do |person, index|
+      puts "#{index}) #{person[:output]}"
+    end
+    person_selected = Integer(gets.chomp)
+    person_chosen = @person_array[person_selected][:object]
+
+    print 'Date: '
+    rental_date = gets.chomp
+
+    @rental_array.push(Rental.new(rental_date, book_chosen, person_chosen))
+  end
+
+
+    # '6 - List all rentals for a given person id',
+
+
 end
 
 
