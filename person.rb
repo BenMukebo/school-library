@@ -4,8 +4,6 @@ class Person
   attr_reader :id, :rentals
   attr_accessor :name, :age
 
-  # attr_accessor :name, :age, :rentals
-
   def initialize(age, name = 'Unknown', parent_permission: true)
     @id = Random.rand(1..1000)
     @name = name
@@ -26,11 +24,6 @@ class Person
   def add_rental(rental)
     @rentals.push(rental)
   end
-
-  # def add_rental(rental)
-  #   @rentals.push(rental) unless @rentals.include?(rental)
-  #   rental.person = self
-  # end
 
   private
 
