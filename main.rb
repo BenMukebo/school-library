@@ -58,7 +58,16 @@ class App
     gets.chomp.to_i
   end
 
- 
+  # 1 - list all books
+  def books_list
+    # @books.each { |book| puts "Title: '#{book.title}', Author: #{book.author}" }
+    # puts books
+    @books.each do |book|
+      puts book[:output]
+    end
+    run
+  end
+
   # '4 - Create a book',
   def create_book
     print 'Title: '
