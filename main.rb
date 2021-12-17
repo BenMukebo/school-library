@@ -1,10 +1,11 @@
 #!/usr/bin/env ruby
+require 'pry'
 
-require_relative 'book'
-# require_relative 'people'
-require_relative 'teacher'
-require_relative 'student'
-require_relative 'rental'
+require_relative './book'
+# require_relative './people'
+require_relative './teacher'
+require_relative './student'
+require_relative './rental'
 
 class App
   attr_accessor :books, :persons, :rentals
@@ -21,7 +22,7 @@ class App
 
     case choose
     when 1
-      # books_list
+      books_list
       puts 'first choose'
     when 2
       person_list
@@ -34,9 +35,10 @@ class App
     when 6
       rentals_list
     when 7
-    puts "Exit"
+      puts 'Thank you for using the app!'
+      exit
     else
-      puts
+      puts 'Choose a number between 1 to 7'
     end
   end
 
@@ -56,7 +58,28 @@ class App
     gets.chomp.to_i
   end
 
+ 
+  # '4 - Create a book',
+  def create_book
+    print 'Title: '
+    book_title = gets.chomp
+    print 'Author: '
+    book_author = gets.chomp
+
+    book = Book.new(book_title, book_author)
+    @books.push({
+                  output: "Title: #{book.title}, Author: #{book.author}",
+                  object: book
+                })
+
+    # @books.push(Book.new(book_title, book_author))
+     puts 'Book created successfully'
+     puts
+     run
+  end
 end
+
+
 
 def main
   puts 'Welcome to School Library App!'
