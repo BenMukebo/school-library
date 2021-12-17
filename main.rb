@@ -85,7 +85,29 @@ class App
     puts 'create teacher'
   end
 
-  
+  # '3 - Create a student',
+  def create_student
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    print 'Has parent permission? [Y/N]: '
+    parent_permission = gets.chomp != 'n'
+    # binding.pry
+    student = Student.new(name, age, parent_permission)
+    @persons.push({:display => "[Student] Name: #{name}, ID: #{student.id} Age: #{age}", :object => student})
+    puts 'create student'
+    # print 'Age: '
+    # age = gets.chomp
+    # print 'Name: '
+    # name = gets.chomp
+    # print 'parent_permission: '
+    # parent_permission = gets.chomp
+    # @persons.push(Student.new(parent_permission, age, name))
+    # puts 'create teacher'
+  end
+
+
 
   # '4 - Create a book',
   def create_book
