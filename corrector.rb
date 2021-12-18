@@ -4,6 +4,3 @@ class Corrector
   end
 end
 
-# person = Corrector.new
-
-# puts person.correct_name('benkasmukebomagnus')

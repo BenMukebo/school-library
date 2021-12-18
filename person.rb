@@ -24,7 +24,6 @@ class Person
   end
 
   def add_rental(book, date)
-    # @rentals.push(rental)
     Rental.new(book, self, date)
   end
 
@@ -35,6 +34,3 @@ class Person
   end
 end
 
-# person = Person.new(name: 'ben', age: 34, parent_permission: true)
-
-# puts person.can_use_services?
