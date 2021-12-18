@@ -14,10 +14,9 @@ class App
     @rentals = []
   end
 
-  def run 
+  def run
     choose = select_options
     choose = select_options while choose < 1 || choose > 7
-
     case choose
     when 1
       books_list
@@ -35,8 +34,8 @@ class App
     when 7
       puts 'Thank you for using the app!'
       exit
-    else
-      puts 'Choose a number between 1 to 7'
+      # else
+      #   puts 'Choose a number between 1 to 7'
     end
   end
 
@@ -71,7 +70,7 @@ class App
 
   # 2 - List all people'
   def person_list
-    @persons.each {|individual| puts("Name: #{individual.name}, Age: #{individual.age}")}
+    @persons.each { |individual| puts("Name: #{individual.name}, Age: #{individual.age}") }
     run
   end
 
@@ -149,7 +148,9 @@ class App
       selected_book = gets.chomp.to_i
 
       puts('Select a user from the following list (not using their id)')
-      @persons.each_with_index { |person, index| puts("#{index}) Name: #{person.name} ID: #{person.id} Age: #{person.age}")}
+      @persons.each_with_index do |person, index|
+        puts("#{index}) Name: #{person.name} ID: #{person.id} Age: #{person.age}")
+      end
       selected_person = gets.chomp.to_i
 
       print('Date: ')
@@ -173,11 +174,11 @@ class App
     puts @rentals
     @rentals.each do |rental|
       # binding.pry
-      if rental.person.id == selected_id
-        puts
-        puts("Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}")
-        puts
-      end
+      next unless rental.person.id == selected_id
+
+      puts
+      puts("Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}")
+      puts
     end
     run
   end
@@ -186,8 +187,8 @@ end
 def main
   puts 'Welcome to School Library App!'
   puts
-  app = App.new()
-  app.run()
+  app = App.new
+  app.run
 end
 
-main()
+main
