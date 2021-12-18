@@ -14,7 +14,7 @@ class App
     @rentals = []
   end
 
-  def run
+  def run # rubocop:todo Metrics/CyclomaticComplexity
     choose = select_options
     choose = select_options while choose < 1 || choose > 7
     case choose
@@ -51,7 +51,6 @@ class App
       '6 - List all rentals for a given person id',
       '7 - Exit'
     ]
-    puts
     puts options
     gets.chomp.to_i
   end
@@ -60,7 +59,7 @@ class App
   def books_list
     if @books.length.positive?
       @books.each do |book|
-        puts " Title #{book.title}, Author #{book.author}"
+        puts " Title: #{book.title}, Author: #{book.author}"
       end
     else
       puts 'No books added yet!'
@@ -70,7 +69,10 @@ class App
 
   # 2 - List all people'
   def person_list
-    @persons.each { |individual| puts("Name: #{individual.name}, Age: #{individual.age}") }
+    @persons.each do |individual| 
+      # binding.pry
+      puts"[#{individual.class}] Name: #{individual.name}, Age: #{individual.age}"
+    end
     run
   end
 
@@ -141,15 +143,15 @@ class App
   def create_rental
     if @books.length.positive? && @persons.length.positive?
       puts
-      puts('Select a book from the following list')
+      puts('Select a book from the following list by number')
 
       @books.each_with_index { |book, index| puts("#{index}) Title: #{book.title} Author: #{book.author}") }
       puts
       selected_book = gets.chomp.to_i
 
-      puts('Select a user from the following list (not using their id)')
+      puts('Select a user from the following list by number(not id)')
       @persons.each_with_index do |person, index|
-        puts("#{index}) Name: #{person.name} ID: #{person.id} Age: #{person.age}")
+        puts("#{index}) [#{person.class}] Name: #{person.name} ID: #{person.id} Age: #{person.age}")
       end
       selected_person = gets.chomp.to_i
 
@@ -171,7 +173,7 @@ class App
     print('ID of person: ')
     selected_id = gets.chomp.to_i
     puts('Rentals: ')
-    puts @rentals
+
     @rentals.each do |rental|
       # binding.pry
       next unless rental.person.id == selected_id
