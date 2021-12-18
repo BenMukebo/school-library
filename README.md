@@ -11,10 +11,12 @@
 - Implement classes and objects in Ruby.
 - Implement encapsulation and inheritance with Ruby.
 - Run a program using the command line.
-- Implement composition (as an example of the design pattern).
+- Implement composition (as an example of the design pattern)
 - Run a program using the command line.
 - Run a program using the command line.
 - Set up associations between classes and objects.
+- Build interactive console apps.
+- Run a program using the command line.
 
 
 ## Getting Started

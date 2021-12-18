@@ -69,9 +69,9 @@ class App
 
   # 2 - List all people'
   def person_list
-    @persons.each do |individual| 
+    @persons.each do |individual|
       # binding.pry
-      puts"[#{individual.class}] Name: #{individual.name}, Age: #{individual.age}"
+      puts "[#{individual.class}] Name: #{individual.name}, Age: #{individual.age}"
     end
     run
   end
