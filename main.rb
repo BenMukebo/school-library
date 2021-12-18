@@ -2,14 +2,12 @@
 require 'pry'
 
 require_relative './book'
-# require_relative './people'
 require_relative './teacher'
 require_relative './student'
 require_relative './rental'
 
 class App
-  attr_accessor :books, :persons, :rentals
-
+  # attr_accessor :books, :persons, :rentals
   def initialize
     @persons = []
     @books = []
@@ -43,6 +41,7 @@ class App
   end
 
   def select_options
+    puts
     puts 'Please choose an option by entering a number: '
     options = [
       '1 - List all books',
@@ -60,17 +59,19 @@ class App
 
   # 1 - list all books
   def books_list
-    # @books.each { |book| puts "Title: '#{book.title}', Author: #{book.author}" }
-    # puts books
-    @books.each do |book|
-      puts book[:output]
+    if @books.length.positive?
+      @books.each do |book|
+        puts " Title #{book.title}, Author #{book.author}"
+      end
+    else
+      puts 'No books added yet!'
     end
     run
   end
 
   # 2 - List all people'
   def person_list
-    @persons.each {|individual| puts(individual[:display])}
+    @persons.each {|individual| puts("Name: #{individual.name}, Age: #{individual.age}")}
     run
   end
 
@@ -82,10 +83,7 @@ class App
     name = gets.chomp
     print 'Specialization: '
     specialization = gets.chomp
-    teacher = Teacher.new(specialization, name, age)
-    # binding.pry
-    @persons.push({:display => "[Teacher] Name: #{name}, ID: #{teacher.id} Age: #{age}", :object => teacher})
-    # @persons.push({"Teacher" => Teacher.new(specialization, age, name)})
+    @persons << Teacher.new(specialization, name, age)
     puts 'create teacher'
   end
 
@@ -97,9 +95,7 @@ class App
     name = gets.chomp
     print 'Has parent permission? [Y/N]: '
     parent_permission = gets.chomp != 'n'
-    # binding.pry
-    student = Student.new(name, age, parent_permission)
-    @persons.push({:display => "[Student] Name: #{name}, ID: #{student.id} Age: #{age}", :object => student})
+    @persons << Student.new(name, age, parent_permission)
     puts 'create student'
   end
 
@@ -124,52 +120,68 @@ class App
 
   # '4 - Create a book',
   def create_book
-    print 'Title: '
-    book_title = gets.chomp
-    print 'Author: '
-    book_author = gets.chomp
-
-    book = Book.new(book_title, book_author)
-    @books.push({
-                  output: "Title: #{book.title}, Author: #{book.author}",
-                  object: book
-                })
-
-    # @books.push(Book.new(book_title, book_author))
-     puts 'Book created successfully'
-     puts
-     run
+    print('Title: ')
+    title = gets.chomp
+    print('Author: ')
+    author = gets.chomp
+    @books << Book.new(title, author)
+    puts('Book created successfully!')
+    run
   end
 
   # '5 - Create a rental',
-  def create_rental
-    puts 'Select a book from the following list by number: '
-    @books.each_with_index do |book, index|
-      puts "#{index}) #{book[:output]}"
-    end
-    book_selected = Integer(gets.chomp)
-    book_chosen = @books[book_selected][:object]
 
-    puts 'Select a person from the following list by number (not id): '
-    @person_array.each_with_index do |person, index|
-      puts "#{index}) #{person[:output]}"
-    end
-    person_selected = Integer(gets.chomp)
-    person_chosen = @person_array[person_selected][:object]
+  def handled_rental(selected_book, selected_person, selected_date)
+    @rentals << Rental.new(@books[selected_book], @persons[selected_person], selected_date)
 
-    print 'Date: '
-    rental_date = gets.chomp
-
-    @rental_array.push(Rental.new(rental_date, book_chosen, person_chosen))
+    puts('Rental created')
+    puts
+    run
   end
 
+  def create_rental
+    if @books.length.positive? && @persons.length.positive?
+      puts
+      puts('Select a book from the following list')
 
-    # '6 - List all rentals for a given person id',
+      @books.each_with_index { |book, index| puts("#{index}) Title: #{book.title} Author: #{book.author}") }
+      puts
+      selected_book = gets.chomp.to_i
 
+      puts('Select a user from the following list (not using their id)')
+      @persons.each_with_index { |person, index| puts("#{index}) Name: #{person.name} ID: #{person.id} Age: #{person.age}")}
+      selected_person = gets.chomp.to_i
 
+      print('Date: ')
+      selected_date = gets.chomp.to_s
+      puts
+
+      handled_rental(selected_book, selected_person, selected_date)
+    else
+      puts 'No books or no persons yet!'
+      run
+    end
+  end
+
+  # '6 - List all rentals for a given person id',
+  def rentals_list
+    puts('Rentals: ')
+    puts
+    print('ID of person: ')
+    selected_id = gets.chomp.to_i
+    puts('Rentals: ')
+    puts @rentals
+    @rentals.each do |rental|
+      # binding.pry
+      if rental.person.id == selected_id
+        puts
+        puts("Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}")
+        puts
+      end
+    end
+    run
+  end
 end
-
-
 
 def main
   puts 'Welcome to School Library App!'
