@@ -3,4 +3,3 @@ class Corrector
     name[0...10].capitalize
   end
 end
-
