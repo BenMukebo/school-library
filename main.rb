@@ -1,13 +1,9 @@
-#!/usr/bin/env ruby
-require 'pry'
-
 require_relative './book'
 require_relative './teacher'
 require_relative './student'
 require_relative './rental'
 
 class App
-  # attr_accessor :books, :persons, :rentals
   def initialize
     @persons = []
     @books = []
@@ -151,7 +147,7 @@ class App
 
       puts('Select a user from the following list by number(not id)')
       @persons.each_with_index do |person, index|
-        puts("#{index}) [#{person.class}] Name: #{person.name} ID: #{person.id} Age: #{person.age}")
+        puts("#{index}) [#{person.class}]  Name: #{person.name}  ID: #{person.id}  Age: #{person.age}")
       end
       selected_person = gets.chomp.to_i
 
