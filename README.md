@@ -74,8 +74,13 @@ This project is build with:
 - Twitter [@BenMukebo](https://twitter.com/BenMukebo)
 - LinkedIn [BenMukebo](https://www.linkedin.com/in/kasongo-mukebo-ben-591720205/)
 
+## 🤝 Contributor
 
-## 🤝 Contributing
+👤 **Muhammad Sesay**
+
+- GitHub: [@mmsesay](https://github.com/mmsesay)
+- Twitter [@DeeMaejor](https://twitter.com/DeeMaejor)
+- LinkedIn [MuhammadSesay](https://www.linkedin.com/in/muhammad-m-sesay/)
 
 Contributions, issues, and feature requests are welcome!
 
