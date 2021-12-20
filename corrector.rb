@@ -3,7 +3,3 @@ class Corrector
     name[0...10].capitalize
   end
 end
-
-# person = Corrector.new
-
-# puts person.correct_name('benkasmukebomagnus')
