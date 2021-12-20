@@ -19,7 +19,6 @@ class App
     else
       puts 'No books added yet!'
     end
-    run
   end
 
   # 2 - List all people'
@@ -28,7 +27,6 @@ class App
       # binding.pry
       puts "[#{individual.class}] Name: #{individual.name}, Age: #{individual.age}"
     end
-    run
   end
 
   # '3 - Create a teacher',
@@ -71,7 +69,6 @@ class App
     end
     puts 'Person created successfully'
     puts
-    run
   end
 
   # '4 - Create a book',
@@ -82,7 +79,6 @@ class App
     author = gets.chomp
     @books << Book.new(title, author)
     puts('Book created successfully!')
-    run
   end
 
   # '5 - Create a rental',
@@ -92,7 +88,6 @@ class App
 
     puts('Rental created')
     puts
-    run
   end
 
   def create_rental
@@ -117,7 +112,6 @@ class App
       handled_rental(selected_book, selected_person, selected_date)
     else
       puts 'No books or no persons yet!'
-      run
     end
   end
 
@@ -137,6 +131,5 @@ class App
       puts("Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}")
       puts
     end
-    run
   end
 end
