@@ -54,21 +54,15 @@ class App
 
     person_type = gets.chomp while person_type != '2' && person_type != '1'
 
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+
     case person_type
     when '1'
-      print 'Age: '
-      age = gets.chomp
-      print 'Name: '
-      name = gets.chomp
-
       create_student(age, name)
-
     when '2'
-      print 'Age: '
-      age = gets.chomp
-      print 'Name: '
-      name = gets.chomp
-
       create_teacher(age, name)
     end
     puts 'Person created successfully'
