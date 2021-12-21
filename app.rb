@@ -1,3 +1,4 @@
+require 'json'
 require_relative './book'
 require_relative './teacher'
 require_relative './student'
@@ -134,5 +135,13 @@ class App
       puts("Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}")
       puts
     end
+  end
+
+  def sava_data
+    File.write("./json/books.json", JSON.generate(@books), mode: "a")
+
+    File.write("./json/people.json", JSON.generate(@persons), mode: "a")
+
+    File.write("./json/rentals.json", JSON.generate(@rentals), mode: "a")
   end
 end
