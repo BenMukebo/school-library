@@ -30,25 +30,19 @@ class App
   end
 
   # '3 - Create a teacher',
-  def create_teacher
-    print 'Age: '
-    age = gets.chomp
-    print 'Name: '
-    name = gets.chomp
+  def create_teacher(age, name)
     print 'Specialization: '
     specialization = gets.chomp
+
     @persons << Teacher.new(specialization, name, age)
     puts 'create teacher'
   end
 
   # '3 - Create a student',
-  def create_student
-    print 'Age: '
-    age = gets.chomp
-    print 'Name: '
-    name = gets.chomp
+  def create_student(age, name)
     print 'Has parent permission? [Y/N]: '
     parent_permission = gets.chomp != 'n'
+
     @persons << Student.new(name, age, parent_permission)
     puts 'create student'
   end
@@ -62,23 +56,38 @@ class App
 
     case person_type
     when '1'
-      create_student
+      print 'Age: '
+      age = gets.chomp
+      print 'Name: '
+      name = gets.chomp
+
+      create_student(age, name)
 
     when '2'
-      create_teacher
+      print 'Age: '
+      age = gets.chomp
+      print 'Name: '
+      name = gets.chomp
+
+      create_teacher(age, name)
     end
     puts 'Person created successfully'
     puts
   end
 
   # '4 - Create a book',
-  def create_book
+  def create_book(title, author)
+    @books << Book.new(title, author)
+    puts('Book created successfully!')
+  end
+
+  def book_data
     print('Title: ')
     title = gets.chomp
     print('Author: ')
     author = gets.chomp
-    @books << Book.new(title, author)
-    puts('Book created successfully!')
+
+    create_book(title, author)
   end
 
   # '5 - Create a rental',

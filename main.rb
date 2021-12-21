@@ -33,7 +33,7 @@ def main
     when '3'
       app.create_person
     when '4'
-      app.create_book
+      app.book_data
     when '5'
       app.create_rental
     when '6'
