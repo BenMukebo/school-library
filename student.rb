@@ -6,8 +6,6 @@ class Student < Person
   def initialize(*args, classroom: 'Unknown', **kwargs)
     super(*args, **kwargs)
     @classroom = classroom
-    # @age = age
-    # @name = name
   end
 
   def classroom=(classroom)
