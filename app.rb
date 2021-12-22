@@ -145,13 +145,13 @@ class App
     print('ID of person: ')
     selected_id = gets.chomp.to_i
     puts('Rentals: ')
-    @rentals.each do |rental|
-      if rental['persons'] == selected_id
+    found_person = @persons.find { |person| person['id'] == selected_id }
+    found_rental = @rentals.find { |rental| rental['persons'] == selected_id }
 
-        puts " Date: #{rental['date']}, Book #{rental['book']} by #{rental['persons']}"
-      else
-        puts 'ID not found'
-      end
+    if found_person && found_rental
+      puts "Date: #{found_rental['date']}, Book #{found_rental['book']} by #{found_person['name']}"
+    else
+      puts 'ID not found'
     end
   end
 
