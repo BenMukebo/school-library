@@ -1,3 +1,4 @@
+require 'json'
 require_relative('./rental')
 
 class Book
@@ -13,7 +14,11 @@ class Book
     Rental.new(self, person, date)
   end
 
-  def to_hash
-    {title: @title, author: @author}
+  def convert_to_json
+    {
+      'class_name' => self.class.name,
+      'title' => @title,
+      'author' => @author
+    }.to_json
   end
 end

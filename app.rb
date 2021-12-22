@@ -15,9 +15,8 @@ class App
   def books_list
     if @books.length.positive?
       @books.each do |book|
-        # puts " Title: #{book.title}, Author: #{book.author}"
-        # {:age=>"jos", :name=>"11"}
-        puts " Title: #{book[:title]}, Author: #{book[:author]}"
+        puts " Title: #{book.title}, Author: #{book.author}"
+        # puts " Title: #{book[:title]}, Author: #{book[:author]}"
         puts
       end
     else
@@ -28,9 +27,9 @@ class App
   # 2 - List all people'
   def person_list
     @persons.each do |individual|
-      puts
+      puts individual
       # binding.pry
-      puts "[#{individual.class}] Name: #{individual[:name]}, Age: #{individual[:age]}"
+      # puts "[#{individual[:class_name]}] Name: #{individual[:name]}, Age: #{individual[:age]}"
       # puts "[#{individual.class}] Name: #{individual.name}, Age: #{individual.age}"
     end
   end
@@ -41,7 +40,13 @@ class App
     specialization = gets.chomp
 
     new_teacher = Teacher.new(specialization, name, age)
-    @persons << new_teacher.to_hash
+    hash = {
+      'class_name' => new_teacher.class.name,
+      'name' => new_teacher.name,
+      'age' => new_teacher.age,
+      'specialization' => new_teacher.specialization
+    }
+    @persons << hash
     puts 'create teacher'
   end
 
@@ -51,7 +56,13 @@ class App
     parent_permission = gets.chomp != 'n'
 
     new_student = Student.new(name, age, parent_permission)
-    @persons << new_student.to_hash
+    hash = {
+      'class_name' => new_student.class.name,
+      'name' => new_student.name,
+      'age' => new_student.age,
+      'parent_permission' => new_student.parent_permission
+    }
+    @persons << hash
     puts 'create student'
   end
 
@@ -80,7 +91,8 @@ class App
   # '4 - Create a book',
   def create_book(title, author)
     new_book = Book.new(title, author)
-    @books << new_book.to_hash
+    hash = { 'title' => new_book.title, 'author' => new_book.author }
+    @books << hash
     puts('Book created successfully!')
   end
 
@@ -154,11 +166,10 @@ class App
   end
 
   def sava_data
-    File.write("./json/books.json", JSON.generate(@books), mode: "a")
+    File.write('./json/books.json', JSON.generate(@books)) if @books.any?
 
-    File.write("./json/people.json", JSON.generate(@persons), mode: "a")
+    File.write('./json/people.json', JSON.generate(@persons)) if @persons.any?
 
-    File.write("./json/rentals.json", JSON.generate(@rentals), mode: "a")
-
+    File.write('./json/rentals.json', JSON.generate(@rentals)) if @rentals.any?
   end
 end

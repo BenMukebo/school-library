@@ -13,7 +13,12 @@ class Student < Person
   def classroom=(classroom)
     classroom.students.push(self) unless classroom.students.include?(self)
   end
-  # def to_hash
-  #   {name = @name, age = @age}
-  # end
+
+  def convert_to_json
+    {
+      'class_name' => self.class.name,
+      'name' => @name,
+      'age' => @age
+    }.to_json
+  end
 end

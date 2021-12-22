@@ -1,3 +1,4 @@
+require 'json'
 require_relative('./person')
 
 class Teacher < Person
@@ -14,8 +15,12 @@ class Teacher < Person
     true
   end
 
-  def to_hash
-    {name: @name, age: @age}
+  def convert_to_json
+    {
+      'class_name' => self.class.name,
+      'name' => @name,
+      'age' => @age,
+      'specialization' => @specialization
+    }.to_json
   end
-
 end
