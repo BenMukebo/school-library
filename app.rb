@@ -26,7 +26,8 @@ class App
   # 2 - List all people'
   def person_list
     @persons.each do |individual|
-      puts "[#{individual['class_name']}], Name: #{individual['name']}, Age: #{individual['age']}"
+      # puts individual
+      puts "[#{individual['class_name']}], Name: #{individual['name']}, ID: #{individual['id']}, Age: #{individual['age']}"
     end
   end
 
@@ -36,11 +37,14 @@ class App
     specialization = gets.chomp
 
     new_teacher = Teacher.new(specialization, name, age)
+    # puts new_teacher.id
+
     hash = {
       'class_name' => new_teacher.class.name,
       'name' => name,
       'age' => age,
-      'specialization' => new_teacher.specialization
+      'specialization' => new_teacher.specialization,
+      'id' => new_teacher.id
     }
     @persons << hash
     puts 'create teacher'
@@ -56,7 +60,8 @@ class App
       'class_name' => new_student.class.name,
       'name' => name,
       'age' => age,
-      'parent_permission' => new_student.parent_permission
+      'parent_permission' => new_student.parent_permission,
+      'id' => new_student.id
     }
     @persons << hash
     puts 'create student'
@@ -104,9 +109,12 @@ class App
   # '5 - Create a rental',
 
   def handled_rental(selected_book, selected_person, selected_date)
-    # puts (Rental.new(@books[selected_book], @persons[selected_person], selected_date))
-    new_rental = Rental.new(@books[:selected_book], @persons[:selected_person], selected_date)
-    @rentals << new_rental.to_hash
+    hash = {
+      'book' => selected_book,
+      'persons' => selected_person,
+      'date' => selected_date
+    }
+    @rentals << hash
 
     puts('Rental created')
     puts
@@ -114,28 +122,27 @@ class App
 
   def create_rental
     if @books.length.positive? && @persons.length.positive?
-    # if @books.length.positive?
-
       puts
       puts('Select a book from the following list by number')
 
-      # @books.each_with_index { |book, index| puts("#{index}) Title: #{book.title} Author: #{book.author}") }
-      @books.each_with_index { |book, index| puts("#{index}) Title: #{book[:title]} Author: #{book[:author]}") }
+      @books.each_with_index { |book, index| puts("#{index}) Title: #{book['title']} Author: #{book['author']}") }
       puts
       selected_book = gets.chomp.to_i
+      book_name = @books[selected_book]['title']
 
       puts('Select a user from the following list by number(not id)')
+
       @persons.each_with_index do |person, index|
-        # puts("#{index}) [#{person.class}]  Name: #{person.name}  ID: #{person.id}  Age: #{person.age}")
-        puts("#{index}) [#{person.class}]  Name: #{person[:name]}  ID: #{person[:id]}  Age: #{person[:age]}")
+        puts("#{index}) [#{person['class_name']}]  Name: #{person['name']} ID: #{person['id']} Age: #{person['age']}")
       end
+
       selected_person = gets.chomp.to_i
+      person_name = @persons[selected_person]['name']
 
       print('Date: ')
       selected_date = gets.chomp.to_s
       puts
-
-      handled_rental(selected_book, selected_person, selected_date)
+      handled_rental(book_name, person_name, selected_date)
     else
       puts 'No books or no persons yet!'
     end
@@ -148,15 +155,9 @@ class App
     print('ID of person: ')
     selected_id = gets.chomp.to_i
     puts('Rentals: ')
-
-    @rentals.each do |rental|
-      # binding.pry
-      # next unless rental.person.id == selected_id
-      next unless rental.person[:id] == selected_id
-
+    @rentals.each do |rental|     
       puts
-      # puts("Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}")
-      puts " Date: #{rental[:date]}, Book: #{rental[:book.title]} by #{rental[:book.author]}"
+      puts " Date: #{rental['date']}, Book #{rental['book']} by #{rental['persons']}"
       puts
     end
   end
@@ -186,6 +187,16 @@ class App
       end
     else
       @books = []
+    end
+  end
+
+  def load_rentals_from_file
+    if File.exist?('./json/rentals.json')
+      JSON.parse(File.read('./json/rentals.json')).each do |rental|
+        @rentals << rental
+      end
+    else
+      @rentals = []
     end
   end
 end
