@@ -11,7 +11,6 @@ class App
     @rentals = []
   end
 
-  # 1 - list all books
   def books_list
     if @books.length.positive?
       @books.each do |book|
@@ -23,21 +22,18 @@ class App
     end
   end
 
-  # 2 - List all people'
   def person_list
     @persons.each do |individual|
-      # puts individual
-      puts "[#{individual['class_name']}], Name: #{individual['name']}, ID: #{individual['id']}, Age: #{individual['age']}"
+      puts "[#{individual['class_name']}],
+        Name: #{individual['name']},
+        ID: #{individual['id']}, Age: #{individual['age']}"
     end
   end
 
-  # '3 - Create a teacher',
   def create_teacher(age, name)
     print 'Specialization: '
     specialization = gets.chomp
-
     new_teacher = Teacher.new(specialization, name, age)
-    # puts new_teacher.id
 
     hash = {
       'class_name' => new_teacher.class.name,
@@ -50,7 +46,6 @@ class App
     puts 'create teacher'
   end
 
-  # '3 - Create a student',
   def create_student(age, name)
     print 'Has parent permission? [Y/N]: '
     parent_permission = gets.chomp != 'n'
@@ -67,7 +62,6 @@ class App
     puts 'create student'
   end
 
-  # '3 - Create a person',
   def create_person
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     person_type = 0
@@ -89,7 +83,6 @@ class App
     puts
   end
 
-  # '4 - Create a book',
   def create_book(title, author)
     new_book = Book.new(title, author)
     hash = { 'title' => new_book.title, 'author' => new_book.author }
@@ -105,8 +98,6 @@ class App
 
     create_book(title, author)
   end
-
-  # '5 - Create a rental',
 
   def handled_rental(selected_book, selected_person, selected_date)
     hash = {
@@ -137,28 +128,30 @@ class App
       end
 
       selected_person = gets.chomp.to_i
-      person_name = @persons[selected_person]['name']
+      person_id = @persons[selected_person]['id']
 
       print('Date: ')
       selected_date = gets.chomp.to_s
       puts
-      handled_rental(book_name, person_name, selected_date)
+      handled_rental(book_name, person_id, selected_date)
     else
       puts 'No books or no persons yet!'
     end
   end
 
-  # '6 - List all rentals for a given person id',
   def rentals_list
     puts('Rentals: ')
     puts
     print('ID of person: ')
     selected_id = gets.chomp.to_i
     puts('Rentals: ')
-    @rentals.each do |rental|     
-      puts
-      puts " Date: #{rental['date']}, Book #{rental['book']} by #{rental['persons']}"
-      puts
+    @rentals.each do |rental|
+      if rental['persons'] == selected_id
+
+        puts " Date: #{rental['date']}, Book #{rental['book']} by #{rental['persons']}"
+      else
+        puts 'ID not found'
+      end
     end
   end
 
