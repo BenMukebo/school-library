@@ -15,8 +15,7 @@ class App
   def books_list
     if @books.length.positive?
       @books.each do |book|
-        puts " Title: #{book.title}, Author: #{book.author}"
-        # puts " Title: #{book[:title]}, Author: #{book[:author]}"
+        puts "Title: #{book['title']}, Author: #{book['author']}"
         puts
       end
     else
@@ -177,6 +176,16 @@ class App
       end
     else
       @persons = []
+    end
+  end
+
+  def load_books_from_file
+    if File.exist?('./json/books.json')
+      JSON.parse(File.read('./json/books.json')).each do |book|
+        @books << book
+      end
+    else
+      @books = []
     end
   end
 end

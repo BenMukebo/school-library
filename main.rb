@@ -5,6 +5,7 @@ def main
   choose = nil
 
   app.load_person_from_file
+  app.load_books_from_file
 
   puts 'Welcome to School Library App!'
   puts
