@@ -4,6 +4,8 @@ def main
   app = App.new
   choose = nil
 
+  app.load_person_from_file
+
   puts 'Welcome to School Library App!'
   puts
 

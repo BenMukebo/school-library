@@ -27,10 +27,7 @@ class App
   # 2 - List all people'
   def person_list
     @persons.each do |individual|
-      puts individual
-      # binding.pry
-      # puts "[#{individual[:class_name]}] Name: #{individual[:name]}, Age: #{individual[:age]}"
-      # puts "[#{individual.class}] Name: #{individual.name}, Age: #{individual.age}"
+      puts "[#{individual['class_name']}], Name: #{individual['name']}, Age: #{individual['age']}"
     end
   end
 
@@ -42,8 +39,8 @@ class App
     new_teacher = Teacher.new(specialization, name, age)
     hash = {
       'class_name' => new_teacher.class.name,
-      'name' => new_teacher.name,
-      'age' => new_teacher.age,
+      'name' => name,
+      'age' => age,
       'specialization' => new_teacher.specialization
     }
     @persons << hash
@@ -58,8 +55,8 @@ class App
     new_student = Student.new(name, age, parent_permission)
     hash = {
       'class_name' => new_student.class.name,
-      'name' => new_student.name,
-      'age' => new_student.age,
+      'name' => name,
+      'age' => age,
       'parent_permission' => new_student.parent_permission
     }
     @persons << hash
@@ -171,5 +168,15 @@ class App
     File.write('./json/people.json', JSON.generate(@persons)) if @persons.any?
 
     File.write('./json/rentals.json', JSON.generate(@rentals)) if @rentals.any?
+  end
+
+  def load_person_from_file
+    if File.exist?('./json/people.json')
+      JSON.parse(File.read('./json/people.json')).each do |person|
+        @persons << person
+      end
+    else
+      @persons = []
+    end
   end
 end
