@@ -3,12 +3,19 @@ require_relative './book'
 require_relative './teacher'
 require_relative './student'
 require_relative './rental'
+require_relative './loaders'
 
 class App
   def initialize
     @persons = []
     @books = []
     @rentals = []
+
+    loader = Loader.new
+
+    loader.load_person_from_file(@persons)
+    loader.load_books_from_file(@books)
+    loader.load_rentals_from_file(@rentals)
   end
 
   def books_list
@@ -161,35 +168,5 @@ class App
     File.write('./json/people.json', JSON.generate(@persons)) if @persons.any?
 
     File.write('./json/rentals.json', JSON.generate(@rentals)) if @rentals.any?
-  end
-
-  def load_person_from_file
-    if File.exist?('./json/people.json')
-      JSON.parse(File.read('./json/people.json')).each do |person|
-        @persons << person
-      end
-    else
-      @persons = []
-    end
-  end
-
-  def load_books_from_file
-    if File.exist?('./json/books.json')
-      JSON.parse(File.read('./json/books.json')).each do |book|
-        @books << book
-      end
-    else
-      @books = []
-    end
-  end
-
-  def load_rentals_from_file
-    if File.exist?('./json/rentals.json')
-      JSON.parse(File.read('./json/rentals.json')).each do |rental|
-        @rentals << rental
-      end
-    else
-      @rentals = []
-    end
   end
 end

@@ -1,1 +1,1 @@
-[{"class_name":"Student","name":"bebe","age":"12","parent_permission":false,"id":963},{"class_name":"Teacher","name":"Jos","age":"JOs","specialization":"Lecture","id":268}]
+[{"class_name":"Student","name":"bebe","age":"12","parent_permission":false,"id":963},{"class_name":"Teacher","name":"Jos","age":"JOs","specialization":"Lecture","id":268},{"class_name":"Student","name":"Fred","age":"15","parent_permission":true,"id":601}]
