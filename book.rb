@@ -12,4 +12,8 @@ class Book
   def add_rental(person, date)
     Rental.new(self, person, date)
   end
+
+  def to_hash
+    {title: @title, author: @author}
+  end
 end

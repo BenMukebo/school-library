@@ -15,7 +15,10 @@ class App
   def books_list
     if @books.length.positive?
       @books.each do |book|
-        puts " Title: #{book.title}, Author: #{book.author}"
+        # puts " Title: #{book.title}, Author: #{book.author}"
+        # {:age=>"jos", :name=>"11"}
+        puts " Title: #{book[:title]}, Author: #{book[:author]}"
+        puts
       end
     else
       puts 'No books added yet!'
@@ -25,8 +28,10 @@ class App
   # 2 - List all people'
   def person_list
     @persons.each do |individual|
+      puts
       # binding.pry
-      puts "[#{individual.class}] Name: #{individual.name}, Age: #{individual.age}"
+      puts "[#{individual.class}] Name: #{individual[:name]}, Age: #{individual[:age]}"
+      # puts "[#{individual.class}] Name: #{individual.name}, Age: #{individual.age}"
     end
   end
 
@@ -35,7 +40,8 @@ class App
     print 'Specialization: '
     specialization = gets.chomp
 
-    @persons << Teacher.new(specialization, name, age)
+    new_teacher = Teacher.new(specialization, name, age)
+    @persons << new_teacher.to_hash
     puts 'create teacher'
   end
 
@@ -44,7 +50,8 @@ class App
     print 'Has parent permission? [Y/N]: '
     parent_permission = gets.chomp != 'n'
 
-    @persons << Student.new(name, age, parent_permission)
+    new_student = Student.new(name, age, parent_permission)
+    @persons << new_student.to_hash
     puts 'create student'
   end
 
@@ -72,7 +79,8 @@ class App
 
   # '4 - Create a book',
   def create_book(title, author)
-    @books << Book.new(title, author)
+    new_book = Book.new(title, author)
+    @books << new_book.to_hash
     puts('Book created successfully!')
   end
 
@@ -88,7 +96,9 @@ class App
   # '5 - Create a rental',
 
   def handled_rental(selected_book, selected_person, selected_date)
-    @rentals << Rental.new(@books[selected_book], @persons[selected_person], selected_date)
+    # puts (Rental.new(@books[selected_book], @persons[selected_person], selected_date))
+    new_rental = Rental.new(@books[:selected_book], @persons[:selected_person], selected_date)
+    @rentals << new_rental.to_hash
 
     puts('Rental created')
     puts
@@ -96,16 +106,20 @@ class App
 
   def create_rental
     if @books.length.positive? && @persons.length.positive?
+    # if @books.length.positive?
+
       puts
       puts('Select a book from the following list by number')
 
-      @books.each_with_index { |book, index| puts("#{index}) Title: #{book.title} Author: #{book.author}") }
+      # @books.each_with_index { |book, index| puts("#{index}) Title: #{book.title} Author: #{book.author}") }
+      @books.each_with_index { |book, index| puts("#{index}) Title: #{book[:title]} Author: #{book[:author]}") }
       puts
       selected_book = gets.chomp.to_i
 
       puts('Select a user from the following list by number(not id)')
       @persons.each_with_index do |person, index|
-        puts("#{index}) [#{person.class}]  Name: #{person.name}  ID: #{person.id}  Age: #{person.age}")
+        # puts("#{index}) [#{person.class}]  Name: #{person.name}  ID: #{person.id}  Age: #{person.age}")
+        puts("#{index}) [#{person.class}]  Name: #{person[:name]}  ID: #{person[:id]}  Age: #{person[:age]}")
       end
       selected_person = gets.chomp.to_i
 
@@ -129,10 +143,12 @@ class App
 
     @rentals.each do |rental|
       # binding.pry
-      next unless rental.person.id == selected_id
+      # next unless rental.person.id == selected_id
+      next unless rental.person[:id] == selected_id
 
       puts
-      puts("Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}")
+      # puts("Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}")
+      puts " Date: #{rental[:date]}, Book: #{rental[:book.title]} by #{rental[:book.author]}"
       puts
     end
   end
@@ -143,5 +159,6 @@ class App
     File.write("./json/people.json", JSON.generate(@persons), mode: "a")
 
     File.write("./json/rentals.json", JSON.generate(@rentals), mode: "a")
+
   end
 end
