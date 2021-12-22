@@ -8,7 +8,7 @@ def main
   puts
 
   while choose != '7'
-
+    puts
     puts 'Please choose an option by entering a number: '
     options = [
       '1 - List all books',
@@ -40,6 +40,7 @@ def main
       app.rentals_list
     when '7'
       puts 'Thank you for using the app!'
+      app.sava_data
       exit
     end
   end

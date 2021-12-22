@@ -1,3 +1,4 @@
+require 'json'
 require_relative('./person')
 
 class Teacher < Person
@@ -6,6 +7,8 @@ class Teacher < Person
   def initialize(specialization, age, name = 'Unknown')
     super(name, age)
     @specialization = specialization
+    @age = age
+    @name = name
   end
 
   def can_use_services?

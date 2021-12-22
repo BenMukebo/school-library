@@ -1,3 +1,4 @@
+require 'json'
 require_relative('./rental')
 
 class Book
