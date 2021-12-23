@@ -14,8 +14,7 @@ describe Classroom do
 
     it 'Add student ' do
       @classroom.add_student(@student)
-      expect(@classroom.students.size).to be 1 
+      expect(@classroom.students.size).to be 1
     end
-
   end
 end
