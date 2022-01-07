@@ -38,18 +38,19 @@ $ cd school-library
 ```
 
 
-## Install
+## Install linter
 
 ```bash
 $  bundle init
 $  bundle install
 ```
 
-## Run test
+## Run linter
 
 ```bash
 $  rubocop .
 ```
+
 ### Auto-correct
 
 In auto-correct mode, RuboCop will try to automatically fix offenses:
@@ -58,6 +59,17 @@ In auto-correct mode, RuboCop will try to automatically fix offenses:
 $ rubocop -A
 # or
 $ rubocop --auto-correct-all
+```
+## Install unit tests
+
+```bash
+$  gem install rspec  
+```
+
+## Run unit tests
+
+```bash
+$   rspec spec      
 ```
 
 ## Built With
