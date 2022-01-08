@@ -69,7 +69,8 @@ $  gem install rspec
 ## Run unit tests
 
 ```bash
-$   rspec spec      
+$   rspec spec  or just
+$   rspec  
 ```
 
 ## Built With
