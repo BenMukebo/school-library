@@ -73,6 +73,13 @@ $   rspec spec  or just
 $   rspec  
 ```
 
+## Install pry
+
+```bash
+$  gem install pry
+```
+
+
 ## Built With
 
 This project is build with:
